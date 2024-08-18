@@ -1,6 +1,5 @@
 'use client'
 
-import Image from "next/image";
 import simulateSavingsWithRebalancedPriorities from "./incomeAllocationPriority";
 import React from "react";
 import {Button, Input, Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, Tabs, Tab, Card, CardBody} from "@nextui-org/react";
