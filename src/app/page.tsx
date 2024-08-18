@@ -1,6 +1,5 @@
 'use client'
 
-import Image from "next/image";
 import simulateSavingsWithRebalancedPriorities from "./incomeAllocationPriority";
 import React from "react";
 import {Button, Input, Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, Tabs, Tab, Card, CardBody} from "@nextui-org/react";
@@ -44,7 +43,6 @@ export default function Home() {
 
   const [goalCount, setGoalCount] = React.useState(1);
   const [goalTable, setGoalTable] = React.useState([<GoalRow goalCount={goalCount} />]);
-  const [savingsIncome, setSavingsIncome] = React.useState(0);
   const [simulatedGoals, setSimulatedGoals] = React.useState<SimulatedGoal[]>([]);
 
   const addGoalRow = () => {
@@ -112,7 +110,7 @@ export default function Home() {
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       {goalTable}
       <div className="gap-2">
-        <Input id='savingsIncome' label="Savings Income" placeholder="Savings Income"/>
+        <Input isRequired id='savingsIncome' label="Savings Income" placeholder="Savings Income"/>
         <Button onClick={addGoalRow} color="primary" aria-label="add">Add More</Button>
         <Button onClick={simulateGoals} color="danger" aria-label="simulate">Simulate</Button>
       </div>
