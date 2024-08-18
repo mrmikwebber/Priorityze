@@ -30,7 +30,6 @@ export default function Home() {
   };
 
   const currentDate = new Date('2024-08-15');
-  const savingsIncome = 750;
 
   const GoalRow = ({goalCount}: {goalCount: number}) => {
     return (
@@ -43,9 +42,9 @@ export default function Home() {
     )
   }
 
-  // const [savingsArray, setSavingsArray] = React.useState(simulateWeightedSavings(goalInput, targetDates, currentDate, savingsIncome)); 
   const [goalCount, setGoalCount] = React.useState(1);
   const [goalTable, setGoalTable] = React.useState([<GoalRow goalCount={goalCount} />]);
+  const [savingsIncome, setSavingsIncome] = React.useState(0);
   const [simulatedGoals, setSimulatedGoals] = React.useState<SimulatedGoal[]>([]);
 
   const addGoalRow = () => {
@@ -60,6 +59,7 @@ export default function Home() {
   }
 
   const simulateGoals = () => {
+    let savingsIncome = (document.querySelector('#savingsIncome') as HTMLInputElement).value;
     let goalAmounts: number[] = [];
     let goalWeights: number[] = [];
     let goalNames: string[] = [];
@@ -74,8 +74,7 @@ export default function Home() {
       goalWeights = [...goalWeights, goalPriority];
 
     }
-    console.log(simulateSavingsWithRebalancedPriorities(goalNames, goalAmounts, goalWeights, 750));
-    setSimulatedGoals(simulateSavingsWithRebalancedPriorities(goalNames, goalAmounts, goalWeights, 750));
+    setSimulatedGoals(simulateSavingsWithRebalancedPriorities(goalNames, goalAmounts, goalWeights, savingsIncome));
   }
 
   const generateGoalTable = (goalNumber: number) => {
@@ -113,6 +112,7 @@ export default function Home() {
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       {goalTable}
       <div className="gap-2">
+        <Input id='savingsIncome' label="Savings Income" placeholder="Savings Income"/>
         <Button onClick={addGoalRow} color="primary" aria-label="add">Add More</Button>
         <Button onClick={simulateGoals} color="danger" aria-label="simulate">Simulate</Button>
       </div>
