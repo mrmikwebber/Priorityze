@@ -32,7 +32,7 @@ export default function Home() {
   const currentDate = new Date('2024-08-15');
   const savingsIncome = 750;
 
-  const GoalRow = ({goalCount}) => {
+  const GoalRow = ({goalCount}: {goalCount: number}) => {
     return (
       <div className="flex w-full flex-wrap md:flex-nowrap gap-4 items-center">
         <Input id={`goal${goalCount}Name`} label="Goal" placeholder="Goal"/>
