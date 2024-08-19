@@ -56,23 +56,38 @@ export default function Home() {
     });
   }
 
-  const simulateGoals = () => {
-    let savingsIncome = (document.querySelector('#savingsIncome') as HTMLInputElement).value;
-    let goalAmounts: number[] = [];
-    let goalWeights: number[] = [];
-    let goalNames: string[] = [];
+  const areFieldsEmpty = () => {
+    if((document.querySelector('#savingsIncome') as HTMLInputElement).value === '') return true;
     for(let i = 1; i <= goalCount; i++) {
-      const goalName = (document.querySelector(`#goal${i}Name`) as HTMLInputElement).value
-      const goalAmount: number = +(document.querySelector(`#goal${i}Amount`) as HTMLInputElement).value
-      const goalAmountRemaining: number = +(document.querySelector(`#goal${i}AmountRemaining`) as HTMLInputElement).value;
-      const goalPriority: number = +(document.querySelector(`#goal${i}Priority`) as HTMLInputElement).value
+      const goalNameEmpty = (document.querySelector(`#goal${i}Name`) as HTMLInputElement).value === '';
+      const goalAmountEmpty = (document.querySelector(`#goal${i}Amount`) as HTMLInputElement).value === '';
+      const goalAmountRemainingEmpty = (document.querySelector(`#goal${i}AmountRemaining`) as HTMLInputElement).value === '';
+      const goalPriorityEmpty = (document.querySelector(`#goal${i}Priority`) as HTMLInputElement).value === '';
 
-      goalAmounts = [...goalAmounts, goalAmount];
-      goalNames = [...goalNames, goalName];
-      goalWeights = [...goalWeights, goalPriority];
-
+      if(goalNameEmpty || goalAmountEmpty || goalAmountRemainingEmpty || goalPriorityEmpty) return true;
     }
-    setSimulatedGoals(simulateSavingsWithRebalancedPriorities(goalNames, goalAmounts, goalWeights, savingsIncome));
+    return false;
+  }
+
+  const simulateGoals = () => {
+    if(!areFieldsEmpty()) {
+      let savingsIncome = (document.querySelector('#savingsIncome') as HTMLInputElement).value;
+      let goalAmounts: number[] = [];
+      let goalWeights: number[] = [];
+      let goalNames: string[] = [];
+      for(let i = 1; i <= goalCount; i++) {
+        const goalName = (document.querySelector(`#goal${i}Name`) as HTMLInputElement).value
+        const goalAmount: number = +(document.querySelector(`#goal${i}Amount`) as HTMLInputElement).value
+        const goalAmountRemaining: number = +(document.querySelector(`#goal${i}AmountRemaining`) as HTMLInputElement).value;
+        const goalPriority: number = +(document.querySelector(`#goal${i}Priority`) as HTMLInputElement).value;
+  
+        goalAmounts = [...goalAmounts, goalAmount];
+        goalNames = [...goalNames, goalName];
+        goalWeights = [...goalWeights, goalPriority];
+  
+      }
+      setSimulatedGoals(simulateSavingsWithRebalancedPriorities(goalNames, goalAmounts, goalWeights, savingsIncome));
+    }
   }
 
   const generateGoalTable = (goalNumber: number) => {
