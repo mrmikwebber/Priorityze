@@ -4,6 +4,9 @@ import simulateSavingsWithRebalancedPriorities from "./incomeAllocationPriority"
 import React from "react";
 import {Button, Input, Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, Tabs, Tab, Card, CardBody} from "@nextui-org/react";
 
+
+import './globals.css'
+
 export default function Home() {
 
 
@@ -101,9 +104,9 @@ export default function Home() {
     <TableBody emptyContent={"No rows to display."}>
       {simulatedGoals.map((goal) => {
         return (<TableRow key={goal.month}>
-          <TableCell>{goal.month}</TableCell>
-          <TableCell>{goal.remaining[goalNumber]}</TableCell>
-          <TableCell>{goal.allocationDelta[goalNumber]}</TableCell>
+          <TableCell className="table-text-color">{goal.month}</TableCell>
+          <TableCell className="table-text-color">{goal.remaining[goalNumber]}</TableCell>
+          <TableCell className="table-text-color">{goal.allocationDelta[goalNumber]}</TableCell>
         </TableRow>)
       })}
     </TableBody>
